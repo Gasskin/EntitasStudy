@@ -38,13 +38,17 @@ public class EmitInputSystem :IInitializeSystem,IExecuteSystem
     void replacePositionProcess(InputEntity entity,int buttonNum,Vector2 mousePosition)
     {
         // 如果判断到按键按下了，则替换entity上的MouseDown组件，下同
-        if (Input.GetMouseButtonDown(buttonNum))
+        if (Input.GetMouseButtonDown (buttonNum))
+        {
             entity.ReplaceMouseDown(mousePosition);
- 
-        if (Input.GetMouseButton(buttonNum))
+        }
+        if (Input.GetMouseButton (buttonNum))
+        {
             entity.ReplaceMousePosition(mousePosition);
- 
-        if (Input.GetMouseButtonUp(buttonNum))
+        }
+        if (Input.GetMouseButtonUp (buttonNum))
+        {
             entity.ReplaceMouseUp(mousePosition);
+        }
     }
 }
