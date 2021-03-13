@@ -26,7 +26,7 @@ public class EmitInputSystem : IInitializeSystem, IExecuteSystem
     {
         // mouse position
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
+        
         // left mouse button
         if (Input.GetMouseButtonDown(0))
             _leftMouseEntity.ReplaceMouseDown(mousePosition);
