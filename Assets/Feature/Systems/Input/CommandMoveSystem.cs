@@ -28,7 +28,11 @@ public class CommandMoveSystem : ReactiveSystem<InputEntity>
         {
             GameEntity[] movers = _movers.GetEntities();
             if (movers.Length <= 0) return;
-            movers[Random.Range(0, movers.Length)].ReplaceMove(e.mouseDown.position);
+            // movers[Random.Range(0, movers.Length)].ReplaceMove(e.mouseDown.position);
+            foreach (var mover in movers)
+            {
+                mover.ReplaceMove(e.mouseDown.position);
+            }
         }
     }
 }
