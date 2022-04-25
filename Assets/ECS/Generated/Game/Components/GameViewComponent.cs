@@ -8,25 +8,25 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public LogComponent log { get { return (LogComponent)GetComponent(GameComponentsLookup.Log); } }
-    public bool hasLog { get { return HasComponent(GameComponentsLookup.Log); } }
+    public ViewComponent view { get { return (ViewComponent)GetComponent(GameComponentsLookup.View); } }
+    public bool hasView { get { return HasComponent(GameComponentsLookup.View); } }
 
-    public void AddLog(string newMsg) {
-        var index = GameComponentsLookup.Log;
-        var component = (LogComponent)CreateComponent(index, typeof(LogComponent));
-        component.msg = newMsg;
+    public void AddView(UnityEngine.GameObject newGameObject) {
+        var index = GameComponentsLookup.View;
+        var component = (ViewComponent)CreateComponent(index, typeof(ViewComponent));
+        component.gameObject = newGameObject;
         AddComponent(index, component);
     }
 
-    public void ReplaceLog(string newMsg) {
-        var index = GameComponentsLookup.Log;
-        var component = (LogComponent)CreateComponent(index, typeof(LogComponent));
-        component.msg = newMsg;
+    public void ReplaceView(UnityEngine.GameObject newGameObject) {
+        var index = GameComponentsLookup.View;
+        var component = (ViewComponent)CreateComponent(index, typeof(ViewComponent));
+        component.gameObject = newGameObject;
         ReplaceComponent(index, component);
     }
 
-    public void RemoveLog() {
-        RemoveComponent(GameComponentsLookup.Log);
+    public void RemoveView() {
+        RemoveComponent(GameComponentsLookup.View);
     }
 }
 
@@ -40,17 +40,17 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public sealed partial class GameMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherLog;
+    static Entitas.IMatcher<GameEntity> _matcherView;
 
-    public static Entitas.IMatcher<GameEntity> Log {
+    public static Entitas.IMatcher<GameEntity> View {
         get {
-            if (_matcherLog == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.Log);
+            if (_matcherView == null) {
+                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.View);
                 matcher.componentNames = GameComponentsLookup.componentNames;
-                _matcherLog = matcher;
+                _matcherView = matcher;
             }
 
-            return _matcherLog;
+            return _matcherView;
         }
     }
 }

@@ -3,28 +3,27 @@ using System.Collections.Generic;
 using Entitas;
 using UnityEngine;
 
-public class LogSystem : ReactiveSystem<GameEntity>
+public class ChangeSpriteSystem : ReactiveSystem<GameEntity>
 {
-    public LogSystem(Contexts contexts): base(contexts.game)
+    public ChangeSpriteSystem(Contexts contexts) : base(contexts.game)
     {
-        
     }
-
+    
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
     {
-        return context.CreateCollector(GameMatcher.Log);
+        return context.CreateCollector(GameMatcher.MoveComplete);
     }
 
     protected override bool Filter(GameEntity entity)
     {
-        return entity.hasLog;
+        return entity.isMoveComplete && entity.isMover;
     }
 
     protected override void Execute(List<GameEntity> entities)
     {
         foreach (var entity in entities)
         {
-            Debug.Log(entity.log.msg);
+            entity.ReplaceSprite("Sprite2");
         }
     }
 }
