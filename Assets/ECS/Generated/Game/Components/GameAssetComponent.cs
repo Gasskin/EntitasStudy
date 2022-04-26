@@ -8,25 +8,25 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public ViewComponent view { get { return (ViewComponent)GetComponent(GameComponentsLookup.View); } }
-    public bool hasView { get { return HasComponent(GameComponentsLookup.View); } }
+    public AssetComponent asset { get { return (AssetComponent)GetComponent(GameComponentsLookup.Asset); } }
+    public bool hasAsset { get { return HasComponent(GameComponentsLookup.Asset); } }
 
-    public void AddView(UnityEngine.GameObject newView) {
-        var index = GameComponentsLookup.View;
-        var component = (ViewComponent)CreateComponent(index, typeof(ViewComponent));
-        component.view = newView;
+    public void AddAsset(string newAssetName) {
+        var index = GameComponentsLookup.Asset;
+        var component = (AssetComponent)CreateComponent(index, typeof(AssetComponent));
+        component.assetName = newAssetName;
         AddComponent(index, component);
     }
 
-    public void ReplaceView(UnityEngine.GameObject newView) {
-        var index = GameComponentsLookup.View;
-        var component = (ViewComponent)CreateComponent(index, typeof(ViewComponent));
-        component.view = newView;
+    public void ReplaceAsset(string newAssetName) {
+        var index = GameComponentsLookup.Asset;
+        var component = (AssetComponent)CreateComponent(index, typeof(AssetComponent));
+        component.assetName = newAssetName;
         ReplaceComponent(index, component);
     }
 
-    public void RemoveView() {
-        RemoveComponent(GameComponentsLookup.View);
+    public void RemoveAsset() {
+        RemoveComponent(GameComponentsLookup.Asset);
     }
 }
 
@@ -40,17 +40,17 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public sealed partial class GameMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherView;
+    static Entitas.IMatcher<GameEntity> _matcherAsset;
 
-    public static Entitas.IMatcher<GameEntity> View {
+    public static Entitas.IMatcher<GameEntity> Asset {
         get {
-            if (_matcherView == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.View);
+            if (_matcherAsset == null) {
+                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.Asset);
                 matcher.componentNames = GameComponentsLookup.componentNames;
-                _matcherView = matcher;
+                _matcherAsset = matcher;
             }
 
-            return _matcherView;
+            return _matcherAsset;
         }
     }
 }
