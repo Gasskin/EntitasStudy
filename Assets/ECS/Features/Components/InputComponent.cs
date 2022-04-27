@@ -4,9 +4,8 @@ using Entitas;
 using Entitas.CodeGeneration.Attributes;
 using UnityEngine;
 
-[Game]
-public class PositonComponent : IComponent
+[Input,Unique]
+public class InputComponent : IComponent
 {
-    [PrimaryEntityIndex]
     public Vector2Int pos;
 }
